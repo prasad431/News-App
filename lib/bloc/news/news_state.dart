@@ -10,8 +10,8 @@ class NewsInitState extends NewsState {}
 class NewsLoading extends NewsState {}
 
 class NewsLoaded extends NewsState {
-  final List<Article> articles;
-  NewsLoaded({this.articles});
+  final NewsModel newsModel;
+  NewsLoaded({this.newsModel});
 }
 
 class NewsListError extends NewsState {

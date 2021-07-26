@@ -13,9 +13,12 @@ class MockNewsService extends Mock implements NewsService {}
 
 void main() {
   MockNewsService mockNewsService;
+  NewsBloc newsBloc;
   setUp(() {
     mockNewsService = MockNewsService();
+    newsBloc = NewsBloc(newsService: mockNewsService);
   });
+  tearDown(() {});
 
   group('NewsService', () {
     final source = Source(
@@ -38,7 +41,8 @@ void main() {
       totalResults: 1,
       articles: [article],
     );
-    blocTest('emits [NewsLoading, NewsLoaded] when successful',
+    blocTest<NewsBloc, NewsState>(
+        'emits [NewsLoading, NewsLoaded] when successful',
         build: () {
           print(newsmodel.toJson());
           when(mockNewsService.getNews(http.Client(), Strings.newsapi))

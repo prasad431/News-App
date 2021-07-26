@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             );
           }
           if (state is NewsLoaded) {
-            List<Article> articles = state.articles;
+            List<Article> articles = state.newsModel.articles;
             return _list(articles);
           }
           return Loading(

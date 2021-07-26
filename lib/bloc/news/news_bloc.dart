@@ -6,7 +6,6 @@ import 'package:equatable/equatable.dart';
 
 import 'package:news_app/ui/core/exceptions/api_exceptions.dart';
 import 'package:news_app/api/news/news_service.dart';
-import 'package:news_app/data/entities/article.dart';
 import 'package:news_app/data/models/news_model.dart';
 import 'package:news_app/ui/core/utilities/constants/strings.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +25,7 @@ class NewsBloc extends Bloc<NewsEvents, NewsState> {
           NewsModel newsmodel =
               await newsService.getNews(http.Client(), Strings.newsapi);
           if (newsmodel.articles.length != 0) {
-            yield NewsLoaded(articles: newsmodel.articles);
+            yield NewsLoaded(newsModel: newsmodel);
           }
         } on SocketException {
           yield NewsListError(
