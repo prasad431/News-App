@@ -8,7 +8,8 @@ class NewsService implements NewsAPI {
   static NewsService shared = NewsService();
 
   @override
-  Future<NewsModel> getNews(http.Client client, String urlString) async {
+  Future<NewsModel> getNews(String urlString, {http.Client client}) async {
+    if (client == null) client = http.Client();
     var newsModel;
     var resultMap = await APIManager.shared.getRequest(client, urlString);
     String error = resultMap['error'];

@@ -18,7 +18,6 @@ void main() {
 class MyApp extends StatelessWidget {
   final AppRouter _appRouter = AppRouter();
   final NewsBloc newsBloc;
-
   MyApp({Key key, this.newsBloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
