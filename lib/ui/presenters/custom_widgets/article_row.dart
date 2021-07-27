@@ -19,7 +19,7 @@ class ArticleRow extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         child: Row(
           children: <Widget>[
-            Card(
+            /*Card(
               clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
@@ -30,7 +30,7 @@ class ArticleRow extends StatelessWidget {
                     article.urlToImage,
                     fit: BoxFit.cover,
                   )),
-            ),
+            ),*/
             SizedBox(width: 16),
             Flexible(
               child: Column(

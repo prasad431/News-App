@@ -15,7 +15,7 @@ void main() {
     link = 'https://jsonplaceholder.typicode.com/albums/1';
   });
 
-  group('apiManager', () {
+  group('ApiManager', () {
     test('when http calls completed. it does returns response string in map',
         () async {
       String response = '{"userId": 1, "id": 2, "title": "mock"}';
