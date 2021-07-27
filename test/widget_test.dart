@@ -26,7 +26,7 @@ void main() {
       });
     });
 
-    group('NewsWebView', () {
+    group('NewsWebView Screen', () {
       testWidgets('finds gesture detector', (WidgetTester tester) async {
         final GestureDetector gestureDetector = await _getGesture(tester);
         expect(gestureDetector.runtimeType, GestureDetector);
