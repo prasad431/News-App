@@ -7,11 +7,20 @@ class MockNewsModel extends Mock implements NewsModel {
   static MockNewsModel shared = MockNewsModel();
 
   NewsModel getNewsModel(String filepath) {
-    final file = File(filepath);
-    final json = file.readAsStringSync();
+    String json = _getString(filepath);
     return newsModelFromJson(json);
   }
 
-  String getResponse(String filepath) =>
-      newsModelToJson(getNewsModel(filepath));
+  String _getString(String filepath) {
+    File file = File(filepath);
+    String json = file.readAsStringSync();
+    return json;
+  }
+
+  String getResponse({String filepath}) {
+    if (filepath != null)
+      return newsModelToJson(getNewsModel(filepath));
+    else
+      return _getString('test_resources/data.json');
+  }
 }

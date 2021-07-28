@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:news_app/api/rest_client/api_manager.dart';
+import 'package:news_app/ui/core/utilities/constants/strings.dart';
 import 'package:test/test.dart';
 import 'api_manager_test.mocks.dart';
 
@@ -36,8 +37,8 @@ void main() {
     test(
         'when http calls completed. it should return errorvalue something went wrong',
         () async {
-      when(client.get(Uri.parse(link)))
-          .thenAnswer((_) async => http.Response('Not Found', 404));
+      when(client.get(Uri.parse(link))).thenAnswer(
+          (_) async => http.Response('Not Found', Strings.HTTP_FAILURE));
       expect(await APIManager.shared.getRequest(client, link),
           {'error': 'something went worng'});
     });

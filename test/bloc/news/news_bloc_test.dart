@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:news_app/bloc/news/news_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
-import '../../api/news/mock_news_service.dart';
+import '../../api/news/mock_news_api.dart';
 
 void main() {
-  MockNewsService mockNewsService;
+  MockNewsAPI mockNewsService;
   NewsBloc newsBloc;
   setUp(() {
-    mockNewsService = MockNewsService();
+    mockNewsService = MockNewsAPI();
     newsBloc = NewsBloc(newsService: mockNewsService);
   });
 

@@ -5,7 +5,7 @@ import 'package:news_app/bloc/news/news_bloc.dart';
 import 'package:news_app/main.dart';
 import 'package:news_app/ui/presenters/custom_widgets/article_row.dart';
 import 'package:news_app/ui/presenters/news_web_view.dart';
-import 'api/news/mock_news_service.dart';
+import 'api/news/mock_news_api.dart';
 
 void main() {
   group('News App', () {
@@ -50,7 +50,7 @@ Future<GestureDetector> _getGesture(WidgetTester tester) async {
 
 Future<void> _appendTesterPump(WidgetTester tester) async {
   await tester.pumpWidget(MyApp(
-    newsBloc: NewsBloc(newsService: MockNewsService()),
+    newsBloc: NewsBloc(newsService: MockNewsAPI()),
   ));
   await tester.pumpAndSettle();
 }

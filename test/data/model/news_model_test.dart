@@ -1,15 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:news_app/bloc/news/news_bloc.dart';
 import 'package:news_app/data/models/news_model.dart';
-import '../../api/news/mock_news_service.dart';
+import '../../api/news/mock_news_api.dart';
 import '../../data/model/mock_news_model.dart';
 
 void main() {
-  MockNewsService mockNewsService;
+  MockNewsAPI mockNewsService;
   NewsBloc newsBloc;
   String filepath;
   setUp(() {
-    mockNewsService = MockNewsService();
+    mockNewsService = MockNewsAPI();
     newsBloc = NewsBloc(newsService: mockNewsService);
     filepath = 'test_resources/data.json';
   });
@@ -25,7 +25,7 @@ void main() {
     });
 
     test('returns response string using data.json file', () {
-      String response = MockNewsModel.shared.getResponse(filepath);
+      String response = MockNewsModel.shared.getResponse(filepath: filepath);
       expect(response == null, false);
     });
   });
