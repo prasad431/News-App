@@ -27,22 +27,22 @@ class NewsBloc extends Bloc<NewsEvents, NewsState> {
           if (newsmodel.articles.length != 0) {
             yield NewsLoaded(newsModel: newsmodel);
           }
-        } on SocketException {
-          yield NewsListError(
-            error: NoInternetException('No Internet'),
-          );
-        } on HttpException {
-          yield NewsListError(
-            error: NoServiceFoundException('No Service Found'),
-          );
-        } on FormatException {
-          yield NewsListError(
-            error: InvalidFormatException('Invalid Response format'),
-          );
         } catch (e) {
-          yield NewsListError(
-            error: UnknownException(e.toString()),
-          );
+          switch (e) {
+            case SocketException:
+              yield NewsListError(error: NoInternetException('No Internet'));
+              break;
+            case HttpException:
+              yield NewsListError(
+                  error: NoServiceFoundException('No Service Found'));
+              break;
+            case FormatException:
+              yield NewsListError(
+                  error: InvalidFormatException('Invalid Response format'));
+              break;
+            default:
+              yield NewsListError(error: UnknownException(e.toString()));
+          }
         }
 
         break;

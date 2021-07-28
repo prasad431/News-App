@@ -1,0 +1,19 @@
+{
+    "status":"ok",
+    "totalResults":657,
+    "articles":[
+       {
+          "source":{
+             "id":"the-wall-street-journal",
+             "name":"The Wall Street Journal"
+          },
+          "author":"Jacob Gallagher",
+          "title":"How Jeff Bezos’s Space Watch Became a Marketing Win For Omega",
+          "description":"The Blue Origin and Amazon founder.",
+          "url":"https://www.wsj.com/articles/how-jeff-bezoss-space-watch-became-a-marketing-win-for-omega-11627058918",
+          "urlToImage":"https://images.wsj.net/im-373454/social",
+          "publishedAt":"2021-07-23T16:52:29Z",
+          "content":"JEFF BEZOSS Blue Origin mission on Tuesday wasnt just a landmark event in private space travel. It was also a shrewd marketing opportunity for one of the worlds top high-end watch makers. As Mr. Bezo… [+1824 chars]"
+       }
+    ]
+ }

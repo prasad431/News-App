@@ -6,7 +6,6 @@ import '../../api/news/mock_news_service.dart';
 void main() {
   MockNewsService mockNewsService;
   NewsBloc newsBloc;
-
   setUp(() {
     mockNewsService = MockNewsService();
     newsBloc = NewsBloc(newsService: mockNewsService);
