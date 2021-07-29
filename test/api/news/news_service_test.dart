@@ -1,64 +1,39 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:news_app/data/models/news_model.dart';
-import 'package:news_app/ui/core/exceptions/api_exceptions.dart';
+import 'package:news_app/api/news/news_service.dart';
 import 'package:news_app/ui/core/utilities/constants/strings.dart';
-import 'package:http/http.dart' as http;
-import '../../data/model/mock_news_model.dart';
-import '../rest_client/api_manager_test.mocks.dart';
-import 'mock_news_service.dart';
 
-@GenerateMocks([http.Client])
 void main() {
-  MockClient mockClient;
-  MockNewsService mockNewsService;
-
+  NewsService newsService;
   setUp(() {
-    mockClient = MockClient();
-    mockNewsService = MockNewsService();
+    newsService = NewsService.shared;
   });
-
   group('NewsService', () {
-    test(
-        'when http calls completed. it does returns newsmodel with article count > 0',
-        () async {
-      final response = MockNewsModel.shared.getResponse();
-      when(mockClient.get(Uri.parse(Strings.newsapi)))
-          .thenAnswer((_) async => http.Response(response, 200));
-
-      NewsModel newsModel = await mockNewsService.getNews(
-          urlString: Strings.newsapi, client: mockClient);
-      expect(newsModel.articles.length > 0, true);
+    test('when url link not given. it should return Exception type', () async {
+      try {
+        await newsService.getNews();
+      } catch (e) {
+        expect(e.toString(), 'Exception: service url not provided');
+      }
     });
 
-    test(
-        'when url link not given. it should return InvalidFormatException type',
+    test('when url link is invalid. it should return FormatException type',
         () async {
       try {
-        await mockNewsService.getNews();
+        await newsService.getNews(urlString: 'https://');
       } catch (e) {
-        expect(e.runtimeType, InvalidFormatException);
+        expect(e.runtimeType, FormatException);
       }
     });
 
     test(
-        'when url link is invalid. it should return NoServiceFoundException type',
+        'when client is unreachble and url is valid. it should return SocketException type',
         () async {
       try {
-        await mockNewsService.getNews(urlString: 'https://');
+        await newsService.getNews(urlString: Strings.newsapi);
       } catch (e) {
-        expect(e.runtimeType, NoServiceFoundException);
-      }
-    });
-
-    test(
-        'when client is empty and url is valid. it should return UnknownException type with "client not provided"',
-        () async {
-      try {
-        await mockNewsService.getNews(urlString: Strings.newsapi);
-      } catch (e) {
-        expect(e.runtimeType, UnknownException);
+        expect(e.runtimeType, SocketException);
       }
     });
   });

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 
 import 'package:news_app/api/rest_client/api_manager.dart';
@@ -11,7 +13,11 @@ class NewsService implements NewsAPI {
   @override
   Future<NewsModel> getNews({String urlString, http.Client client}) async {
     if (client == null) client = http.Client();
-    if (urlString == null) urlString = Strings.newsapi;
+    if (urlString == null) throw Exception('service url not provided');
+    if (urlString != Strings.newsapi) throw FormatException('invalid link');
+    http.Response response = await client.get(Uri.parse(urlString));
+    if (response.statusCode == Strings.HTTP_FAILURE)
+      throw SocketException('no internet');
     var newsModel;
     var resultMap = await APIManager.shared.getRequest(client, urlString);
     String error = resultMap['error'];

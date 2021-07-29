@@ -8,6 +8,7 @@ import 'package:news_app/api/news/news_api.dart';
 import 'package:news_app/ui/core/exceptions/api_exceptions.dart';
 import 'package:news_app/api/news/news_service.dart';
 import 'package:news_app/data/models/news_model.dart';
+import 'package:news_app/ui/core/utilities/constants/strings.dart';
 part 'news_event.dart';
 part 'news_state.dart';
 
@@ -22,7 +23,8 @@ class NewsBloc extends Bloc<NewsEvents, NewsState> {
       case NewsEvents.fetchNews:
         yield NewsLoading();
         try {
-          NewsModel newsmodel = await newsService.getNews();
+          NewsModel newsmodel =
+              await newsService.getNews(urlString: Strings.newsapi);
           if (newsmodel.articles.length != 0) {
             yield NewsLoaded(newsModel: newsmodel);
           }
